@@ -1,10 +1,14 @@
+---
+title: "Untitled"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
 ## Personlized Bloodglucose Prediction
 
-My journey in analyzing bloodglucose data of a type 1 diabetic patient, modelling this data and making predicition based on this model/these models.
-
-## Data
-
-The data mainly concerns bloodglucose-levels, grams of carbohydrates consumed and insuline injections of one type 1 diabetic patient over the course of 6 months.
+My journey in analyzing bloodglucose data of a type 1 diabetic patient, investigating the appropriate model design for this data and making predicitions based on this model/these models.
 
 ## Data
 
@@ -17,9 +21,11 @@ BGData = read.csv("Data BG.csv", header = TRUE)
 summary(BGData)
 ```
 
-```{r}
-library(knitr) # the package that renders R markdown and has some good additional functionality
-kable(BGData)
-```
+## Including Plots
 
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
 
