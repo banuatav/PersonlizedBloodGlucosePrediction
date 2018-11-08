@@ -1,5 +1,5 @@
 ---
-title: "Untitled"
+title: "Initial Data Analysis"
 output: github_document
 ---
 
@@ -21,11 +21,4 @@ BGData = read.csv("Data BG.csv", header = TRUE)
 summary(BGData)
 ```
 
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
 

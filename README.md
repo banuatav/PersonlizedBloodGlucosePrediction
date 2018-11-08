@@ -1,4 +1,4 @@
-Untitled
+Initial Data Analysis
 ================
 
 Personlized Bloodglucose Prediction
@@ -55,10 +55,3 @@ summary(BGData)
     ##   150 min.Voorgestelde bolus was:   3    2,80 U:   4  
     ##   30 min.Voorgestelde bolus was :   2    3,00 U:   4  
     ##  (Other)                        :   6   (Other): 206
-
-Including Plots
----------------
-
-You can also embed plots, for example:
-
-![](README_files/figure-markdown_github/pressure-1.png)
