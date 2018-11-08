@@ -12,13 +12,43 @@ My journey in analyzing bloodglucose data of a type 1 diabetic patient, investig
 
 ## Data
 
-The data mainly concerns bloodglucose-levels, grams of carbohydrates consumed and insuline injections of one type 1 diabetic patient over the course of 6 months. For each event, the date, timestamp an a description of the even is available. Due to this, it is necessary to clean the data first.Below you can see a summary of what the data looks like before cleaning.
+The data mainly concerns bloodglucose-levels, grams of carbohydrates consumed and insuline injections of one type 1 diabetic patient over the course of 6 months. For each event, the date, timestamp an a description of the even is available. Due to this, it is necessary to clean the data first. Below you can find the first few observations and a summary of the data before cleaning.
 
 ```{r, include=FALSE}
 BGData = read.csv("Data BG.csv", header = TRUE)
 ```
 ```{r BGData}
+head(BGData)
 summary(BGData)
 ```
+### Cleaning Data
 
+We can see that the variable Event has many categories all measured in different ways. The category Carb (which indicates that the patient has eaten a meal that contained carbohydrates) is measured in grams (g) and can be easily seperated into its own variable. The latter is also true voor category Bloodglucose (bloodglucose value measured at a particular point of time in mmol/l).
+
+The Carbs variable can be created by executing the following piece of code.
+
+```{r}
+Carbs = rep(NA, 3343)
+Carbs[BGData$Event == "Carbs"] = BGData$Value[BGData$Event == "Carbs"]
+head(data.frame(BGData$Event, BGData$Value, Carbs))
+```
+
+The last line allows us to check whether the transformation is performed correctly. Similarly, for Bloodglucose we execute
+
+```{r}
+Bloodglucose = rep(NA, 3343)
+Bloodglucose[BGData$Event == "Bloodglucose"] = BGData$Value[BGData$Event == "Bloodglucose"]
+head(data.frame(BGData$Event, BGData$Value, Bloodglucose))
+```
+
+Now we can transform the original variable Event and corresponding variable Value to discard the information on Carbs and Bloodglucose.
+
+```{r}
+BGData$Value[BGData$Event == "Carbs"] = NA
+BGData$Value[BGData$Event == "Bloodglucose"] = NA
+BGData$Event[BGData$Event == "Carbs"] = NA
+BGData$Event[BGData$Event == "Bloodglucose"] = NA
+
+head(BGData)
+```
 
