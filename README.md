@@ -125,7 +125,7 @@ BGData$Value[BGData$Event == "Carbs"] = NA
 BGData$Value[BGData$Event == "Bloodglucose"] = NA
 BGData$Event[BGData$Event == "Carbs"] = NA
 BGData$Event[BGData$Event == "Bloodglucose"] = NA
-
+BGData$Event = factor(BGData$Event)
 head(BGData)
 ```
 
@@ -150,3 +150,15 @@ head(BGData)
     ## 4           <NA>    <NA>
     ## 5 Proposed bolus     5.5
     ## 6           <NA>    <NA>
+
+Transforming the remainder of the categories in Event is a bit more complicated. The injection of insulin (bolus) is subdivided into multiple categories, which need to be extracted from the description. The various categories of this variable are
+
+``` r
+levels(BGData$Event)
+```
+
+    ##  [1] "Bolus"                        "Combination bolus"           
+    ##  [3] "Extended bolus"               "Pod activated"               
+    ##  [5] "Pod deactivated"              "Pump is started"             
+    ##  [7] "Pump is stopped"              "Time change (Winter time)"   
+    ##  [9] "Total amount insulin per day" "Warning"
