@@ -17,4 +17,9 @@ BGData = read.csv("Data BG.csv", header = TRUE)
 summary(BGData)
 ```
 
+```{r}
+library(knitr) # the package that renders R markdown and has some good additional functionality
+kable(BGData)
+```
+
 
