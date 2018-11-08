@@ -58,12 +58,26 @@ Transforming the remainder of the categories in Event is a bit more complicated.
 levels(BGData$Event)
 ```
 
-Three out of 10 categories are related to bolusses: Bolus, Combination bolus, Extended bolus. One seems to be related to insulin injection, but isn't called a bolus: Total amount insulin per day. The remainder of the categories pertain to other events related to the insulin pump (the device that regulates the insulin injection), pod (a tube placed into the pump that contains the insulin), some warnings and the change of time. Let's view the description variables for observations related to bolusses.
+Three out of 10 categories are related to bolusses: Bolus, Combination bolus, Extended bolus. One seems to be related to insulin injection, but isn't called a bolus: Total amount insulin per day. The remainder of the categories pertain to other events related to the insulin pump (the device that regulates the insulin injection), pod (a tube placed into the pump that contains the insulin), some warnings and the change of time. Let's view the categories of the description variables.
 
 ```{r}
-summary(BGData[BGData$Event == "Bolus", -(1:3)])
+levels(BGData$Descripition1)
+levels(BGData$Descripition2)
+levels(BGData$Descripition3)
+levels(BGData$Descripition4)
+levels(BGData$Descripition5)
 ```
 
-summary(BGData[BGData$Event == "Combination bolus",-(1:3)])
-summary(BGData[BGData$Event == "Extended bolus",-(1:3)])
+A quick analysis of the data together with the previous information leads to the following conclusions
+1. Event "Total amount insulin per day" is a summary of the day's total insulin usage. In the description, this entry is broken up into two pieces of information: the "Bolus insulin" (total insulin injected directly as a result of eating or in order to correct for high bloodsugar) and the "Basal insulin" (insulin injection is spread over time).
+2. Event "Bolus",  and "Combination bolus" mean that the pump was intructed to give insulin to the patient. While"Bolus" indicates injection pretty much immediately, with "Extended bolus" it will be injected slowly over a specified time window. A "Combination bolus" is the combination of these two options.
+
+Due the aforementioned, the following variables are created
+
+```{r}
+ImmediateBolus = rep(NA, 3343)
+ImmediateBolus = BGData$DValue1[BGData$Descripition1 == "Direct dosis"]
+```
+
+
 
