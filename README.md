@@ -22,13 +22,13 @@ head(BGData)
     ## 4       Wed 07.11.18 16:31             Carbs  20.0      g           <NA>
     ## 5       Wed 07.11.18 16:09 Combination bolus   5.5      U   Direct dosis
     ## 6       Wed 07.11.18 16:08      Bloodglucose   4.3 mmol/l           <NA>
-    ##   ValueD1  Descripition2 ValueD2             Descripition3 ValueD3
-    ## 1      NA           <NA>      NA                      <NA>      NA
-    ## 2      NA           <NA>      NA                      <NA>      NA
-    ## 3     1.5           <NA>      NA                      <NA>      NA
-    ## 4      NA           <NA>      NA                      <NA>      NA
-    ## 5     3.3 Extended dosis     2.2 Duration ofExtended dosis      60
-    ## 6      NA           <NA>      NA                      <NA>      NA
+    ##   ValueD1  Descripition2 ValueD2              Descripition3 ValueD3
+    ## 1      NA           <NA>      NA                       <NA>      NA
+    ## 2      NA           <NA>      NA                       <NA>      NA
+    ## 3     1.5           <NA>      NA                       <NA>      NA
+    ## 4      NA           <NA>      NA                       <NA>      NA
+    ## 5     3.3 Extended dosis     2.2 Duration of Extended dosis      60
+    ## 6      NA           <NA>      NA                       <NA>      NA
     ##    Descripition4 ValueD4 Descripition5
     ## 1           <NA>      NA          <NA>
     ## 2           <NA>      NA          <NA>
@@ -57,22 +57,22 @@ summary(BGData)
     ##  Total amount insulin per day: 183   3rd Qu.: 21.95                
     ##  Pod activated               :  63   Max.   :189.00                
     ##  (Other)                     :  89   NA's   :138                   
-    ##                    Descripition1     ValueD1               Descripition2 
-    ##  Before meal              :   2   Min.   : 0.050   Basal insulin  : 183  
-    ##  Bolus insulin            : 180   1st Qu.: 1.550   Bolus cancelled:   2  
-    ##  Direct dosis             : 225   Median : 2.650   Extended dosis : 231  
-    ##  Duration ofExtended dosis:  14   Mean   : 5.422   Proposed bolus :  14  
-    ##  Occlusion found          :   1   3rd Qu.: 5.050   NA's           :2913  
-    ##  Proposed bolus           : 724   Max.   :90.000                         
-    ##  NA's                     :2197   NA's   :2179                           
-    ##     ValueD2                         Descripition3     ValueD3    
-    ##  Min.   : 0.200   Duration ofExtended dosis: 231   Min.   : 30   
-    ##  1st Qu.: 2.200   NA's                     :3112   1st Qu.: 60   
-    ##  Median : 4.150                                    Median : 60   
-    ##  Mean   : 4.358                                    Mean   : 85   
-    ##  3rd Qu.: 6.400                                    3rd Qu.:120   
-    ##  Max.   :13.050                                    Max.   :150   
-    ##  NA's   :2915                                      NA's   :3112  
+    ##                     Descripition1     ValueD1               Descripition2 
+    ##  Before meal               :   2   Min.   : 0.050   Basal insulin  : 183  
+    ##  Bolus insulin             : 180   1st Qu.: 1.550   Bolus cancelled:   2  
+    ##  Direct dosis              : 225   Median : 2.650   Extended dosis : 231  
+    ##  Duration of Extended dosis:  14   Mean   : 5.422   Proposed bolus :  14  
+    ##  Occlusion found           :   1   3rd Qu.: 5.050   NA's           :2913  
+    ##  Proposed bolus            : 724   Max.   :90.000                         
+    ##  NA's                      :2197   NA's   :2179                           
+    ##     ValueD2                          Descripition3     ValueD3    
+    ##  Min.   : 0.200   Duration of Extended dosis: 231   Min.   : 30   
+    ##  1st Qu.: 2.200   NA's                      :3112   1st Qu.: 60   
+    ##  Median : 4.150                                     Median : 60   
+    ##  Mean   : 4.358                                     Mean   : 85   
+    ##  3rd Qu.: 6.400                                     3rd Qu.:120   
+    ##  Max.   :13.050                                     Max.   :150   
+    ##  NA's   :2915                                       NA's   :3112  
     ##         Descripition4     ValueD4               Descripition5 
     ##  Proposed bolus: 231   Min.   : 0.550   Bolus cancelled:   1  
     ##  NA's          :3112   1st Qu.: 3.325   NA's           :3342  
@@ -136,13 +136,13 @@ head(BGData)
     ## 4       Wed 07.11.18 16:31              <NA>    NA      g           <NA>
     ## 5       Wed 07.11.18 16:09 Combination bolus   5.5      U   Direct dosis
     ## 6       Wed 07.11.18 16:08              <NA>    NA mmol/l           <NA>
-    ##   ValueD1  Descripition2 ValueD2             Descripition3 ValueD3
-    ## 1      NA           <NA>      NA                      <NA>      NA
-    ## 2      NA           <NA>      NA                      <NA>      NA
-    ## 3     1.5           <NA>      NA                      <NA>      NA
-    ## 4      NA           <NA>      NA                      <NA>      NA
-    ## 5     3.3 Extended dosis     2.2 Duration ofExtended dosis      60
-    ## 6      NA           <NA>      NA                      <NA>      NA
+    ##   ValueD1  Descripition2 ValueD2              Descripition3 ValueD3
+    ## 1      NA           <NA>      NA                       <NA>      NA
+    ## 2      NA           <NA>      NA                       <NA>      NA
+    ## 3     1.5           <NA>      NA                       <NA>      NA
+    ## 4      NA           <NA>      NA                       <NA>      NA
+    ## 5     3.3 Extended dosis     2.2 Duration of Extended dosis      60
+    ## 6      NA           <NA>      NA                       <NA>      NA
     ##    Descripition4 ValueD4 Descripition5
     ## 1           <NA>      NA          <NA>
     ## 2           <NA>      NA          <NA>
@@ -169,9 +169,9 @@ Three out of 10 categories are related to bolusses: Bolus, Combination bolus, Ex
 levels(BGData$Descripition1)
 ```
 
-    ## [1] "Before meal "              "Bolus insulin"            
-    ## [3] "Direct dosis"              "Duration ofExtended dosis"
-    ## [5] "Occlusion found"           "Proposed bolus"
+    ## [1] "Before meal"                "Bolus insulin"             
+    ## [3] "Direct dosis"               "Duration of Extended dosis"
+    ## [5] "Occlusion found"            "Proposed bolus"
 
 ``` r
 levels(BGData$Descripition2)
@@ -183,7 +183,7 @@ levels(BGData$Descripition2)
 levels(BGData$Descripition3)
 ```
 
-    ## [1] "Duration ofExtended dosis"
+    ## [1] "Duration of Extended dosis"
 
 ``` r
 levels(BGData$Descripition4)
@@ -203,5 +203,44 @@ Due the aforementioned, the following variables are created
 
 ``` r
 ImmediateBolus = rep(NA, 3343)
-ImmediateBolus = BGData$DValue1[BGData$Descripition1 == "Direct dosis"]
+ImmediateBolus[BGData$Descripition1 == "Direct dosis"&!is.na(BGData$Descripition1)] = BGData$ValueD1[BGData$Descripition1 == "Direct dosis"&!is.na(BGData$Descripition1)]
+ExtendedBolus = rep(NA, 3343)
+ExtendedBolus[BGData$Descripition2 == "Extended dosis"&!is.na(BGData$Descripition2)] = BGData$ValueD2[BGData$Descripition2 == "Extended dosis"&!is.na(BGData$Descripition2)]
+DailyTotalBasalInsulin = rep(NA, 3343)
+DailyTotalBasalInsulin[BGData$Descripition2 == "Basal insulin"&!is.na(BGData$Descripition2)] = BGData$ValueD2[BGData$Descripition2 == "Basal insulin"&!is.na(BGData$Descripition2)]
+DailyTotalImmediateInsulin = rep(NA, 3343)
+DailyTotalImmediateInsulin[BGData$Descripition1 == "Bolus insulin"&!is.na(BGData$Descripition1)] = BGData$ValueD1[BGData$Descripition1 == "Bolus insulin"&!is.na(BGData$Descripition1)]
+BolusCancelled = rep(0, 3343)
+BolusCancelled[BGData$Descripition2 == "Bolus cancelled"&!is.na(BGData$Descripition2)] = rep(1:3343)[BGData$Descripition2 == "Bolus cancelled"&!is.na(BGData$Descripition2)]
+BolusCancelled[BGData$Descripition5 == "Bolus cancelled"&!is.na(BGData$Descripition5)] = rep(1:3343)[BGData$Descripition5 == "Bolus cancelled"&!is.na(BGData$Descripition5)]
+BeforeMeal = rep(0, 3343)
+BeforeMeal[BGData$Descripition1 == "Before meal"&!is.na(BGData$Descripition1)] = rep(1:3343)[BGData$Descripition1 == "Before meal"&!is.na(BGData$Descripition1)]
+Occlusion = rep(0, 3343)
+Occlusion[BGData$Descripition1 == "Occlusion found"&!is.na(BGData$Descripition1)] = rep(1:3343)[BGData$Descripition1 == "Occlusion found"&!is.na(BGData$Descripition1)]
+ProposedBolus = rep(0, 3343)
+ProposedBolus[BGData$Descripition1 == "Proposed bolus"&!is.na(BGData$Descripition1)] = BGData$ValueD1[BGData$Descripition1 == "Proposed bolus"&!is.na(BGData$Descripition1)]
+ProposedBolus[BGData$Descripition2 == "Proposed bolus"&!is.na(BGData$Descripition2)] = BGData$ValueD2[BGData$Descripition2 == "Proposed bolus"&!is.na(BGData$Descripition2)]
+ProposedBolus[BGData$Descripition4 == "Proposed bolus"&!is.na(BGData$Descripition4)] = BGData$ValueD4[BGData$Descripition4 == "Proposed bolus"&!is.na(BGData$Descripition4)]
+DurationExtDos = rep(0, 3343)
+DurationExtDos[BGData$Descripition1 == "Duration of Extended dosis"&!is.na(BGData$Descripition1)] = BGData$ValueD1[BGData$Descripition1 == "Duration of Extended dosis"&!is.na(BGData$Descripition1)]
+DurationExtDos[BGData$Descripition3 == "Duration of Extended dosis"&!is.na(BGData$Descripition3)] = BGData$ValueD3[BGData$Descripition3 == "Duration of Extended dosis"&!is.na(BGData$Descripition3)]
 ```
+
+This concludes the extraction of information for all bolus related events. The following dummy variables are created for the remaining events.
+
+``` r
+PodAct = rep(0, 3343)
+PodAct[BGData$Event == "Pod activated"] = 1
+PodDeAct = rep(0, 3343)
+PodDeAct[BGData$Event == "Pod deactivated"] = 1
+PumpStart = rep(0, 3343)
+PumpStart[BGData$Event == "Pump is started"] = 1
+PumStop = rep(0, 3343)
+PumStop[BGData$Event == "Time change (Winter time)"] = 1
+TimeChange = rep(0, 3343)
+TimeChange[BGData$Event == "Pod activated"] = 1
+Warning  = rep(0, 3343)
+Warning[BGData$Event == "Warning"] = 1
+```
+
+Combining all these variables into a datefram results in the final dataset.
