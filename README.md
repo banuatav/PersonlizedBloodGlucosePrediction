@@ -235,12 +235,18 @@ PodDeAct = rep(0, 3343)
 PodDeAct[BGData$Event == "Pod deactivated"] = 1
 PumpStart = rep(0, 3343)
 PumpStart[BGData$Event == "Pump is started"] = 1
-PumStop = rep(0, 3343)
-PumStop[BGData$Event == "Time change (Winter time)"] = 1
+PumpStop = rep(0, 3343)
+PumpStop[BGData$Event == "Time change (Winter time)"] = 1
 TimeChange = rep(0, 3343)
 TimeChange[BGData$Event == "Pod activated"] = 1
 Warning  = rep(0, 3343)
 Warning[BGData$Event == "Warning"] = 1
 ```
 
-Combining all these variables into a datefram results in the final dataset.
+Combining all these newly created variables into a dateframe together with the day, date and timestamp results in the cleaned dataset.
+
+``` r
+CleanedBGData = as.data.frame(cbind(BGData$DayOfWeek, BGData$Date, BGData$Time, BeforeMeal, Bloodglucose, BolusCancelled, Carbs, DailyTotalBasalInsulin, DailyTotalImmediateInsulin, DurationExtDos, ExtendedBolus, ImmediateBolus, Occlusion, PodAct, PodDeAct, ProposedBolus, PumpStart, PumpStop, TimeChange, Warning))
+names(CleanedBGData)[1:3] = c("DayOfWeek", "Date", "Time")
+save(CleanedBGData, file = "CleanedBGData.RData")
+```
