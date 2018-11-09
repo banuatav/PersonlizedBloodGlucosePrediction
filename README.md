@@ -59,12 +59,12 @@ summary(BGData)
     ##  (Other)                     :  89   NA's   :138                   
     ##                     Descripition1     ValueD1               Descripition2 
     ##  Before meal               :   2   Min.   : 0.050   Basal insulin  : 183  
-    ##  Bolus insulin             : 180   1st Qu.: 1.550   Bolus cancelled:   2  
-    ##  Direct dosis              : 225   Median : 2.650   Extended dosis : 231  
+    ##  Bolus insulin             : 183   1st Qu.: 1.550   Bolus cancelled:   2  
+    ##  Direct dosis              : 230   Median : 2.650   Extended dosis : 231  
     ##  Duration of Extended dosis:  14   Mean   : 5.422   Proposed bolus :  14  
     ##  Occlusion found           :   1   3rd Qu.: 5.050   NA's           :2913  
     ##  Proposed bolus            : 724   Max.   :90.000                         
-    ##  NA's                      :2197   NA's   :2179                           
+    ##  NA's                      :2189   NA's   :2179                           
     ##     ValueD2                          Descripition3     ValueD3    
     ##  Min.   : 0.200   Duration of Extended dosis: 231   Min.   : 30   
     ##  1st Qu.: 2.200   NA's                      :3112   1st Qu.: 60   
@@ -203,30 +203,32 @@ Due the aforementioned, the following variables are created
 
 ``` r
 ImmediateBolus = rep(NA, 3343)
+ImmediateBolus[BGData$Event == "Bolus"&!is.na(BGData$Event)] = BGData$Value[BGData$Event == "Bolus"&!is.na(BGData$Event)]
 ImmediateBolus[BGData$Descripition1 == "Direct dosis"&!is.na(BGData$Descripition1)] = BGData$ValueD1[BGData$Descripition1 == "Direct dosis"&!is.na(BGData$Descripition1)]
 ExtendedBolus = rep(NA, 3343)
+ExtendedBolus[BGData$Event == "Extended bolus"&!is.na(BGData$Event)] = BGData$Value[BGData$Event == "Extended bolus"&!is.na(BGData$Event)]
 ExtendedBolus[BGData$Descripition2 == "Extended dosis"&!is.na(BGData$Descripition2)] = BGData$ValueD2[BGData$Descripition2 == "Extended dosis"&!is.na(BGData$Descripition2)]
 DailyTotalBasalInsulin = rep(NA, 3343)
 DailyTotalBasalInsulin[BGData$Descripition2 == "Basal insulin"&!is.na(BGData$Descripition2)] = BGData$ValueD2[BGData$Descripition2 == "Basal insulin"&!is.na(BGData$Descripition2)]
 DailyTotalImmediateInsulin = rep(NA, 3343)
 DailyTotalImmediateInsulin[BGData$Descripition1 == "Bolus insulin"&!is.na(BGData$Descripition1)] = BGData$ValueD1[BGData$Descripition1 == "Bolus insulin"&!is.na(BGData$Descripition1)]
 BolusCancelled = rep(0, 3343)
-BolusCancelled[BGData$Descripition2 == "Bolus cancelled"&!is.na(BGData$Descripition2)] = rep(1:3343)[BGData$Descripition2 == "Bolus cancelled"&!is.na(BGData$Descripition2)]
-BolusCancelled[BGData$Descripition5 == "Bolus cancelled"&!is.na(BGData$Descripition5)] = rep(1:3343)[BGData$Descripition5 == "Bolus cancelled"&!is.na(BGData$Descripition5)]
+BolusCancelled[BGData$Descripition2 == "Bolus cancelled"&!is.na(BGData$Descripition2)] = 1
+BolusCancelled[BGData$Descripition5 == "Bolus cancelled"&!is.na(BGData$Descripition5)] = 1
 BeforeMeal = rep(0, 3343)
-BeforeMeal[BGData$Descripition1 == "Before meal"&!is.na(BGData$Descripition1)] = rep(1:3343)[BGData$Descripition1 == "Before meal"&!is.na(BGData$Descripition1)]
+BeforeMeal[BGData$Descripition1 == "Before meal"&!is.na(BGData$Descripition1)] = 1
 Occlusion = rep(0, 3343)
-Occlusion[BGData$Descripition1 == "Occlusion found"&!is.na(BGData$Descripition1)] = rep(1:3343)[BGData$Descripition1 == "Occlusion found"&!is.na(BGData$Descripition1)]
-ProposedBolus = rep(0, 3343)
+Occlusion[BGData$Descripition1 == "Occlusion found"&!is.na(BGData$Descripition1)] = 1
+ProposedBolus = rep(NA, 3343)
 ProposedBolus[BGData$Descripition1 == "Proposed bolus"&!is.na(BGData$Descripition1)] = BGData$ValueD1[BGData$Descripition1 == "Proposed bolus"&!is.na(BGData$Descripition1)]
 ProposedBolus[BGData$Descripition2 == "Proposed bolus"&!is.na(BGData$Descripition2)] = BGData$ValueD2[BGData$Descripition2 == "Proposed bolus"&!is.na(BGData$Descripition2)]
 ProposedBolus[BGData$Descripition4 == "Proposed bolus"&!is.na(BGData$Descripition4)] = BGData$ValueD4[BGData$Descripition4 == "Proposed bolus"&!is.na(BGData$Descripition4)]
-DurationExtDos = rep(0, 3343)
+DurationExtDos = rep(NA, 3343)
 DurationExtDos[BGData$Descripition1 == "Duration of Extended dosis"&!is.na(BGData$Descripition1)] = BGData$ValueD1[BGData$Descripition1 == "Duration of Extended dosis"&!is.na(BGData$Descripition1)]
 DurationExtDos[BGData$Descripition3 == "Duration of Extended dosis"&!is.na(BGData$Descripition3)] = BGData$ValueD3[BGData$Descripition3 == "Duration of Extended dosis"&!is.na(BGData$Descripition3)]
 ```
 
-This concludes the extraction of information for all bolus related events. The following dummy variables are created for the remaining events.
+This concludes the extraction of information for all bolus related events. The following dummy variables are created for the remaining events except Warning. The latter turns out to be related to changes in time (or possible date changes), which is specified by its own dummy variable already
 
 ``` r
 PodAct = rep(0, 3343)
@@ -236,17 +238,15 @@ PodDeAct[BGData$Event == "Pod deactivated"] = 1
 PumpStart = rep(0, 3343)
 PumpStart[BGData$Event == "Pump is started"] = 1
 PumpStop = rep(0, 3343)
-PumpStop[BGData$Event == "Time change (Winter time)"] = 1
+PumpStop[BGData$Event == "Pump is stopped"] = 1
 TimeChange = rep(0, 3343)
-TimeChange[BGData$Event == "Pod activated"] = 1
-Warning  = rep(0, 3343)
-Warning[BGData$Event == "Warning"] = 1
+TimeChange[BGData$Event == "Time change (Winter time)"] = 1
 ```
 
 Combining all these newly created variables into a dateframe together with the day, date and timestamp results in the cleaned dataset.
 
 ``` r
-CleanedBGData = as.data.frame(cbind(BGData$DayOfWeek, BGData$Date, BGData$Time, BeforeMeal, Bloodglucose, BolusCancelled, Carbs, DailyTotalBasalInsulin, DailyTotalImmediateInsulin, DurationExtDos, ExtendedBolus, ImmediateBolus, Occlusion, PodAct, PodDeAct, ProposedBolus, PumpStart, PumpStop, TimeChange, Warning))
+CleanedBGData = as.data.frame(cbind(BGData$DayOfWeek, BGData$Date, BGData$Time, BeforeMeal, Bloodglucose, BolusCancelled, Carbs, DailyTotalBasalInsulin, DailyTotalImmediateInsulin, DurationExtDos, ExtendedBolus, ImmediateBolus, Occlusion, PodAct, PodDeAct, ProposedBolus, PumpStart, PumpStop, TimeChange))
 names(CleanedBGData)[1:3] = c("DayOfWeek", "Date", "Time")
 save(CleanedBGData, file = "CleanedBGData.RData")
 ```
