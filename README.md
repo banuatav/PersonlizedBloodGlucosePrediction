@@ -6,8 +6,7 @@ Personlized Bloodglucose Prediction
 
 My journey in analyzing bloodglucose data of a type 1 diabetic patient, investigating the appropriate model design for this data and making predicitions based on this model/these models.
 
-Data
-----
+### Data
 
 The data mainly concerns bloodglucose-levels, grams of carbohydrates consumed and insuline injections of one type 1 diabetic patient over the course of 6 months. For each event, the date, timestamp an a description of the even is available. Due to this, it is necessary to clean the data first. Below you can find the first few observations and a summary of the data before cleaning.
 
@@ -82,7 +81,7 @@ summary(BGData)
     ##                        Max.   :14.500                         
     ##                        NA's   :3112
 
-### Cleaning Data
+#### Cleaning Data
 
 We can see that the variable Event has many categories all measured in different ways. The category Carb (which indicates that the patient has eaten a meal that contained carbohydrates) is measured in grams (g) and can be easily seperated into its own variable. The latter is also true voor category Bloodglucose (bloodglucose value measured at a particular point of time in mmol/l).
 
@@ -250,3 +249,15 @@ CleanedBGData = data.frame(BGData$DayOfWeek, BGData$Date, BGData$Time, BeforeMea
 names(CleanedBGData)[1:3] = c("DayOfWeek", "Date", "Time")
 save(CleanedBGData, file = "CleanedBGData.RData")
 ```
+
+### Data Visualization
+
+``` r
+par(mfrow=c(2,2))
+plot(CleanedBGData$Bloodglucose, type = "o", ylab = "Bloodglucose (mmol/l)", xlab = "Time")
+plot(CleanedBGData$Carbs, type = "o", ylab = "Carbs (g)", xlab = "Time")
+plot(CleanedBGData$ImmediateBolus, type = "o", ylab = "Immediate Bolus (U)", xlab = "Time")
+plot(CleanedBGData$ExtendedBolus, type = "o", ylab = "Extended Bolus (U)", xlab = "Time")
+```
+
+![](README_files/figure-markdown_github/unnamed-chunk-10-1.png)
